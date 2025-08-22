@@ -1,4 +1,4 @@
-name: Java CI with Maven
+jobs:name: Full CI/CD Pipeline – Minor Version Bump
 
 on:
   push:
@@ -7,22 +7,55 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  ci-cd:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      # Set up Java 17
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build with Maven
+      # Build & Test with Maven
+      - name: Build & Test
         run: mvn clean install
 
-      - name: Run tests
-        run: mvn test
+      # Fetch all tags for semantic versioning
+      - name: Setup Git
+        run: git fetch --tags
+
+      # Bump MINOR version automatically
+      - name: Calculate next MINOR version
+        id: semver
+        uses: phips28/gh-action-bump-version@v9
+        with:
+          tag-prefix: "v"
+          default-bump: "minor"          # bump MINOR instead of PATCH
+          commit-message: "chore: bump version to {{version}}"
+          create-tag: true
+
+      # Set VERSION environment variable
+      - name: Set VERSION env
+        run: echo "VERSION=${{ steps.semver.outputs.new_version }}" >> $GITHUB_ENV
+
+      # Build Docker image
+      - name: Build Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
+          docker build -t $IMAGE_NAME:${{ env.VERSION }} .
+
+      # Push Docker image to GitHub Container Registry
+      - name: Push Docker image
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
+          docker push $IMAGE_NAME:${{ env.VERSION }}
+
+      # Trigger Render deployment
+      - name: Deploy to Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

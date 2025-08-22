@@ -1,4 +1,4 @@
-jobs:name: Full CI/CD Pipeline – Minor Version Bump
+name: Full CI/CD Pipeline – Minor Version Bump
 
 on:
   push:

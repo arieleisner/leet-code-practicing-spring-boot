@@ -12,11 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class PracticeControllerTest {
 
     @Test
-    void fibonacci() {
+    void fibonacciTest() {
+        PracticeController practiceController = new PracticeController();
+        assertEquals(0, practiceController.fibonacci(0));
+        assertEquals(1, practiceController.fibonacci(1));
     }
 
     @Test
     void isPalindrome() {
+        PracticeController practiceController = new PracticeController();
+        assertTrue(practiceController.isPalindrome("oro"));
+        assertFalse(practiceController.isPalindrome("not-a-palindrome"));
     }
 
     @Test

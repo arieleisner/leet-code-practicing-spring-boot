@@ -2,9 +2,11 @@ name: Full CI/CD Pipeline – Minor Version Bump
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
   ci-cd:

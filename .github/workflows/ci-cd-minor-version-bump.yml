@@ -29,21 +29,12 @@ jobs:
         run: mvn clean install
 
       # Fetch all tags for semantic versioning
-      - name: Setup Git
-        run: git fetch --tags
-
-      # Bump MINOR version automatically
-      - name: Calculate next MINOR version
-        id: semver
-        uses: phips28/gh-action-bump-version@master
-        with:
-          tag-prefix: "v"
-          version-type: "minor"          # bump MINOR instead of PATCH
-          commit-message: "chore: bump version to {{version}}"
+      - name: Bump minor version
+        run: ./scripts/bump_minor_version.sh
 
       # Set VERSION environment variable
       - name: Set VERSION env
-        run: echo "VERSION=${{ steps.semver.outputs.new_version }}" >> $GITHUB_ENV
+        run: echo "VERSION=${{ env.NEW_TAG }}" >> $GITHUB_ENV
 
       # Build Docker image
       - name: Build Docker image

@@ -38,9 +38,8 @@ jobs:
         uses: phips28/gh-action-bump-version@master
         with:
           tag-prefix: "v"
-          default-bump: "minor"          # bump MINOR instead of PATCH
+          version-type: "minor"          # bump MINOR instead of PATCH
           commit-message: "chore: bump version to {{version}}"
-          create-tag: true
 
       # Set VERSION environment variable
       - name: Set VERSION env

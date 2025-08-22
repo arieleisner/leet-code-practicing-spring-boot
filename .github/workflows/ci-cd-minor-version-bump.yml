@@ -35,7 +35,7 @@ jobs:
       # Bump MINOR version automatically
       - name: Calculate next MINOR version
         id: semver
-        uses: phips28/gh-action-bump-version@v9
+        uses: phips28/gh-action-bump-version@v8
         with:
           tag-prefix: "v"
           default-bump: "minor"          # bump MINOR instead of PATCH

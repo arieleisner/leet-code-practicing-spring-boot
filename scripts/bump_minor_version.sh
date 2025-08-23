@@ -2,9 +2,11 @@
 set -e
 
 # Fetch all tags
+echo "Fetch tags"
 git fetch --tags --force
 
 # Now list tags
+echo "List tags"
 git tag
 
 # Get the latest tag or default to v0.0.0 if none exist

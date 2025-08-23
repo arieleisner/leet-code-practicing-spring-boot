@@ -2,7 +2,10 @@
 set -e
 
 # Fetch all tags
-git fetch origin --tags
+git fetch --tags --force
+
+# Now list tags
+git tag
 
 # Get the latest tag or default to v0.0.0 if none exist
 LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")

@@ -28,10 +28,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Build & Test with Maven
-      - name: Build & Test
-        run: mvn clean install
-
       # Fetch all tags for semantic versioning
       - name: Bump minor version
         run: ./scripts/bump_minor_version.sh
@@ -40,8 +36,14 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
 
       # Set VERSION environment variable
-      - name: Set VERSION env
-        run: echo "VERSION=${{ env.NEW_TAG }}" >> $GITHUB_ENV
+      - name: Set VERSION env and inject version into app
+        run: |
+          echo "VERSION=${{ env.NEW_TAG }}" >> $GITHUB_ENV
+          echo "app.version=$VERSION" > src/main/resources/version.properties
+
+      # Build & Test with Maven
+      - name: Build & Test
+        run: mvn clean install
 
       # Login to docker registry
       - name: Log in to GitHub Container Registry

@@ -2,6 +2,7 @@ package com.ariel.eisner.practice;
 
 import com.ariel.eisner.practice.dto.GroupAnagramsRequest;
 import com.ariel.eisner.practice.dto.TwoSumRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,6 +14,14 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/api")
 public class PracticeController {
+
+    @Value("${app.version:DEV}")
+    private String appVersion;
+
+    @GetMapping("/version")
+    public String getVersion() {
+        return appVersion;
+    }
 
     @GetMapping("/fibonacci/{n}")
     public int fibonacci(@PathVariable int n) {

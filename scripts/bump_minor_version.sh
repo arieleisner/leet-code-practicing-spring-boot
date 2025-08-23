@@ -10,10 +10,10 @@ echo "List tags"
 git tag
 
 # Get the latest tag or default to v0.0.0 if none exist
-echo "Latest tag retrieval command: git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0""
-git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0"
+echo "Latest tag retrieval command: git tag --sort=-creatordate | head -n1 || echo ''"
+git tag --sort=-creatordate | head -n1 || echo "v0.0.0"
 
-LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+LATEST_TAG=$(git tag --sort=-creatordate | head -n1 || echo "v0.0.0")
 echo "Current latest tag: $LATEST_TAG"
 
 # Parse major, minor, patch

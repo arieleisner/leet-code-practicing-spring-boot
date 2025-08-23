@@ -5,5 +5,6 @@ target/
 
 ### IntelliJ IDEA ###
 .idea/*
+*.iml
 # Ignore all .idea files except the workspace.xml
 !.idea/workspace.xml

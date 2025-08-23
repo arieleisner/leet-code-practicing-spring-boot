@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write   # allows pushing tags and commits
+  packages: write   # needed for pushing to GHCR
 
 jobs:
   ci-cd:
@@ -42,16 +43,20 @@ jobs:
       - name: Set VERSION env
         run: echo "VERSION=${{ env.NEW_TAG }}" >> $GITHUB_ENV
 
+      # Login to docker registry
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       # Build Docker image
       - name: Build Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}:${{ env.NEW_TAG }}
           docker build -t $IMAGE_NAME:${{ env.VERSION }} .
 
       # Push Docker image to GitHub Container Registry
       - name: Push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}:${{ env.NEW_TAG }}
           docker push $IMAGE_NAME:${{ env.VERSION }}
 
       # Trigger Render deployment

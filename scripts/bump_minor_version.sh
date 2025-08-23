@@ -18,7 +18,7 @@ echo "Bumping to new tag: $NEW_TAG"
 
 # Create and push the new tag
 git tag $NEW_TAG
-git push origin $NEW_TAG
+git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git $NEW_TAG
 
 # Export new tag for GitHub Actions
 echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV

@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write   # allows pushing tags and commits
+
 jobs:
   ci-cd:
     runs-on: ubuntu-latest
@@ -31,6 +34,9 @@ jobs:
       # Fetch all tags for semantic versioning
       - name: Bump minor version
         run: ./scripts/bump_minor_version.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
       # Set VERSION environment variable
       - name: Set VERSION env

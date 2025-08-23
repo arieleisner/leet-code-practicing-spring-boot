@@ -50,13 +50,13 @@ jobs:
       # Build Docker image
       - name: Build Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}:${{ env.NEW_TAG }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
           docker build -t $IMAGE_NAME:${{ env.VERSION }} .
 
       # Push Docker image to GitHub Container Registry
       - name: Push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}:${{ env.NEW_TAG }}
+          IMAGE_NAME=ghcr.io/${{ github.repository }}
           docker push $IMAGE_NAME:${{ env.VERSION }}
 
       # Trigger Render deployment

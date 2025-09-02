@@ -17,6 +17,8 @@ class PracticeControllerTest {
         PracticeController practiceController = new PracticeController();
         assertEquals(0, practiceController.fibonacci(0));
         assertEquals(1, practiceController.fibonacci(1));
+        assertEquals(112688866, practiceController.fibonacci(255));
+        assertEquals(1556111435, practiceController.fibonacci(1000));
     }
 
     @Test

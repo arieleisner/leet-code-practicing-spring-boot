@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,6 +15,8 @@ import java.util.stream.IntStream;
 @RestController
 @RequestMapping("/api")
 public class PracticeController {
+
+    private final Map<Integer, Integer> memory = new HashMap<>();
 
     @Value("${app.version:DEV}")
     private String appVersion;
@@ -25,8 +28,14 @@ public class PracticeController {
 
     @GetMapping("/fibonacci/{n}")
     public int fibonacci(@PathVariable int n) {
-        if (n <= 1) return n;
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        if (n <= 1) {
+            memory.put(n, n);
+        } else if (!memory.containsKey(n)) {
+            memory.put(n - 1, fibonacci(n - 1));
+            memory.put(n - 2, fibonacci(n - 2));
+            memory.put(n, memory.get(n - 1) + memory.get(n - 2));
+        }
+        return memory.get(n);
     }
 
     @GetMapping("/isPalindrome/{word}")

@@ -2,9 +2,9 @@ package com.ariel.eisner.practice;
 
 import com.ariel.eisner.practice.dto.GroupAnagramsRequest;
 import com.ariel.eisner.practice.dto.TwoSumRequest;
+import com.ariel.eisner.practice.infrastructure.adapter.in.rest.PracticeController;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 

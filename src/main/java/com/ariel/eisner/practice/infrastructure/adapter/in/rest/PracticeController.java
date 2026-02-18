@@ -1,4 +1,4 @@
-package com.ariel.eisner.practice;
+package com.ariel.eisner.practice.infrastructure.adapter.in.rest;
 
 import com.ariel.eisner.practice.dto.GroupAnagramsRequest;
 import com.ariel.eisner.practice.dto.TwoSumRequest;

@@ -93,4 +93,33 @@ class TwoDimensionIteratorServiceTest {
         assertFalse(service.hasNext());
         assertNull(service.next());
     }
+
+    @Test
+    public void integrationTest() {
+        matrix = new Integer[][] { { }, { 0, 1, 2 }, { }, { 3, 4, 5 }, { 6, 7, 8, 9 } };
+        service = new TwoDimensionIteratorService<>(matrix);
+
+        assertTrue(service.hasNext());
+        assertEquals(0, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(1, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(2, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(3, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(4, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(5, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(6, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(7, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(8, service.next());
+        assertTrue(service.hasNext());
+        assertEquals(9, service.next());
+        assertFalse(service.hasNext());
+        assertNull(service.next());
+    }
 }

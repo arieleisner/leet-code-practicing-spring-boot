@@ -1,6 +1,8 @@
 package com.ariel.eisner.practice.infrastructure.adapter.in.rest;
 
+import com.ariel.eisner.practice.application.usecase.TwoDimensionIteratorService;
 import com.ariel.eisner.practice.dto.GroupAnagramsRequest;
+import com.ariel.eisner.practice.dto.TwoDimensionArrayRequest;
 import com.ariel.eisner.practice.dto.TwoSumRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -84,5 +86,19 @@ public class PracticeController {
                         .map(String::valueOf)
                         .collect(Collectors.joining())));
         return new ArrayList<>(collect.values());
+    }
+
+    @PostMapping("/twoDimensionIteration")
+    public List<Integer> twoDimensionIteration(@RequestBody TwoDimensionArrayRequest request) {
+        var data = request.data();
+        var array = data.stream()
+                .map(row -> row.toArray(new Integer[0]))
+                .toArray(Integer[][]::new);
+        TwoDimensionIteratorService<Integer> it = new TwoDimensionIteratorService<>(array);
+        List<Integer> result = new ArrayList<>();
+        while (it.hasNext()) {
+            result.add(it.next());
+        }
+        return result;
     }
 }

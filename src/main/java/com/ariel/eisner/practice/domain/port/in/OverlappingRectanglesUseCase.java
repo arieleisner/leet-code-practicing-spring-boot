@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OverlappingRectanglesUseCase {
     boolean areOverlapping(List<Rectangle> rectangles);
+
+    int intersectionArea(List<Rectangle> rectangles);
 }

@@ -7,6 +7,22 @@ import java.util.List;
 
 public class OverlappingRectangleService implements OverlappingRectanglesUseCase {
 
+
+    /**
+     *  * Visualization:
+     *          y
+     *          ^
+     *       y1 |      --------
+     *          |      |      |
+     *       y2 |      |   --------
+     *          |      |   |  |   |
+     *       h1 |      ----|---   |
+     *          |          |      |
+     *       h2 |          --------
+     *         -|-----------------------------------> x
+     *          |     x1  x2  w1  w2
+     */
+
     @Override
     public boolean areOverlapping(List<Rectangle> rectangles) {
         for (int i = 0; i < rectangles.size() - 1; ++i) {
@@ -17,6 +33,22 @@ public class OverlappingRectangleService implements OverlappingRectanglesUseCase
             }
         }
         return false;
+    }
+
+    @Override
+    public int intersectionArea(List<Rectangle> rectangles) {
+        if (areOverlapping(rectangles)) {
+            Rectangle r1 = rectangles.get(0);
+            Rectangle r2 = rectangles.get(1);
+            int top = Math.min(r1.y(), r2.y());
+            int bottom = Math.max(r1.y() - r1.height(), r2.y() - r2.height());
+            int left = Math.max(r1.x(), r2.x());
+            int right = Math.min(r1.x() + r1.width(), r2.x() + r2.width());
+            int height = top - bottom;
+            int width = right - left;
+            return height * width;
+        }
+        return 0;
     }
 
     private boolean areOverlapping(Rectangle r1, Rectangle r2) {

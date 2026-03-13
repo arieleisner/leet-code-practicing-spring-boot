@@ -73,4 +73,70 @@ class OverlappingRectangleServiceTest {
 
         Assertions.assertFalse(areOverlapping);
     }
+
+    /**
+     * Given two rectangles on a 2D graph, return the area of their intersection.
+     * If the rectangles don't intersect, return 0.
+     *
+     * For example, given the following rectangles:
+     *
+     * {
+     *     "top_left": (1, 4),
+     *     "dimensions": (3, 3) # width, height
+     * }
+     * and
+     *
+     * {
+     *     "top_left": (0, 5),
+     *     "dimensions": (4, 3) # width, height
+     * }
+     * return 6.
+     */
+    @Test
+    void area0IfNoIntersection() {
+        OverlappingRectangleService service = new OverlappingRectangleService();
+        List<Rectangle> rectangles = new ArrayList<>();
+        rectangles.add(new Rectangle(new Coordinates(-1, 3), new Coordinates(2, 1)));
+        rectangles.add(new Rectangle(new Coordinates(0, 5), new Coordinates(4, 3)));
+
+        int area = service.intersectionArea(rectangles);
+
+        Assertions.assertEquals(0, area);
+    }
+
+    @Test
+    void areaIfIntersection() {
+        OverlappingRectangleService service = new OverlappingRectangleService();
+        List<Rectangle> rectangles = new ArrayList<>();
+        rectangles.add(new Rectangle(new Coordinates(1, 4), new Coordinates(3, 3)));
+        rectangles.add(new Rectangle(new Coordinates(0, 5), new Coordinates(4, 3)));
+
+        int area = service.intersectionArea(rectangles);
+
+        Assertions.assertEquals(6, area);
+    }
+
+    @Test
+    void areaIfIntersectionAndEqualSquare() {
+        OverlappingRectangleService service = new OverlappingRectangleService();
+        List<Rectangle> rectangles = new ArrayList<>();
+        rectangles.add(new Rectangle(new Coordinates(0, 0), new Coordinates(1, 1)));
+        rectangles.add(new Rectangle(new Coordinates(0, 0), new Coordinates(1, 1)));
+
+        int area = service.intersectionArea(rectangles);
+
+        Assertions.assertEquals(1, area);
+    }
+
+    @Test
+    void areaIfIntersectionAndZeroArea() {
+        OverlappingRectangleService service = new OverlappingRectangleService();
+        List<Rectangle> rectangles = new ArrayList<>();
+        rectangles.add(new Rectangle(new Coordinates(0, 0), new Coordinates(0, 0)));
+        rectangles.add(new Rectangle(new Coordinates(0, 0), new Coordinates(0, 0)));
+
+        int area = service.intersectionArea(rectangles);
+
+        Assertions.assertEquals(0, area);
+    }
 }

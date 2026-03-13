@@ -1,9 +1,9 @@
 package com.ariel.eisner.practice.infrastructure.adapter.in.rest;
 
 import com.ariel.eisner.practice.application.usecase.TwoDimensionIteratorService;
-import com.ariel.eisner.practice.dto.GroupAnagramsRequest;
-import com.ariel.eisner.practice.dto.TwoDimensionArrayRequest;
-import com.ariel.eisner.practice.dto.TwoSumRequest;
+import com.ariel.eisner.practice.infrastructure.adapter.in.rest.dto.GroupAnagramsRequest;
+import com.ariel.eisner.practice.infrastructure.adapter.in.rest.dto.TwoDimensionArrayRequest;
+import com.ariel.eisner.practice.infrastructure.adapter.in.rest.dto.TwoSumRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 

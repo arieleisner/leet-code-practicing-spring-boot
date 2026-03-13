@@ -1,4 +1,4 @@
-package com.ariel.eisner.practice.dto;
+package com.ariel.eisner.practice.infrastructure.adapter.in.rest.dto;
 
 import java.util.List;
 

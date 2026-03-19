@@ -1,11 +1,10 @@
 package com.ariel.eisner.practice.domain.port.in;
 
+import com.ariel.eisner.practice.domain.service.ArraysService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArraysServiceTest {
 

@@ -7,22 +7,6 @@ import java.util.List;
 
 public class OverlappingRectangleService implements OverlappingRectanglesUseCase {
 
-
-    /**
-     *  * Visualization:
-     *          y
-     *          ^
-     *       y1 |      --------
-     *          |      |      |
-     *       y2 |      |   --------
-     *          |      |   |  |   |
-     *       h1 |      ----|---   |
-     *          |          |      |
-     *       h2 |          --------
-     *         -|-----------------------------------> x
-     *          |     x1  x2  w1  w2
-     */
-
     @Override
     public boolean areOverlapping(List<Rectangle> rectangles) {
         for (int i = 0; i < rectangles.size() - 1; ++i) {

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntersectionLineSegmentsService implements IntersectingLineSegmentsUseCase {
+
     @Override
     public int calculate(List<Integer> p, List<Integer> q) {
         int counter = 0;

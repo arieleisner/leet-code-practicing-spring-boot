@@ -11,10 +11,10 @@ public class MaximumWeightPathService implements MaximumWeightPathUseCase {
         if (triangle.length == 0) {
             return 0;
         }
-        return dfsRecursive(triangle, 0, 0, new HashMap<>());
+        return dfsPostOrder(triangle, 0, 0, new HashMap<>());
     }
 
-    private int dfsRecursive(int[][] triangle, int row, int col, Map<String, Integer> memo) {
+    private int dfsPostOrder(int[][] triangle, int row, int col, Map<String, Integer> memo) {
         if (row == triangle.length - 1) {
             return triangle[row][col];
         }
@@ -24,8 +24,8 @@ public class MaximumWeightPathService implements MaximumWeightPathUseCase {
             return memo.get(key);
         }
 
-        int left = dfsRecursive(triangle, row + 1, col, memo);
-        int right = dfsRecursive(triangle, row + 1, col + 1, memo);
+        int left = dfsPostOrder(triangle, row + 1, col, memo);
+        int right = dfsPostOrder(triangle, row + 1, col + 1, memo);
 
         int result = triangle[row][col] + Math.max(left, right);
 

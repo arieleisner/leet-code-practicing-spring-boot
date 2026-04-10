@@ -12,9 +12,8 @@ public class BottomViewBinaryTreeService implements BottomViewBinaryTreeUseCase 
     public List<String> calculate(BinaryTreeNode root) {
         // dfs,
         // measure the distance on each iteration,
-        // and store the pair <distance, node key> on stack
-        // return a list with every top element of the stack
-
+        // and store the pair <distance, node key> on list
+        // return a list with every first element of each list
         TreeMap<Integer, List<String>> distancesByNode = new TreeMap<>();
 
         dfs(root, 0, distancesByNode);

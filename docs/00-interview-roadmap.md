@@ -1,7 +1,7 @@
 # Java Interview Roadmap
 
 ## Java Core
-- [ ] JVM basics
+- [x] JVM basics
 - [ ] OOP
 - [ ] Exceptions
 - [ ] Generics

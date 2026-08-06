@@ -2,7 +2,7 @@
 
 ## Java Core
 - [x] JVM basics
-- [ ] OOP
+- [x] OOP
 - [ ] Exceptions
 - [ ] Generics
 - [ ] Records
